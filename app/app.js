@@ -1,9 +1,12 @@
 const express = require("express")
 const dotenv = require("dotenv")
+const { connectDatabase } = require("./config/database")
 
 dotenv.config()
 
-
+/**
+ * Create the Express app
+ */
 const createApp = async () => {
   try{
 
@@ -11,6 +14,9 @@ const createApp = async () => {
     // middleware
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
+
+    // database connection
+    await connectDatabase()
   
     const PORT = process.env.PORT || 3000
 
