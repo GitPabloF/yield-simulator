@@ -1,4 +1,4 @@
-const { calculateYield } = require("./yeld.service")
+const { calculateYield } = require("./yield.service")
 
 describe("calculateYield", () => {
   test("calculates net income and return for each year", () => {

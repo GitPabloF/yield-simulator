@@ -78,14 +78,17 @@ const calculateYield = ({
     return {
       year1: {
         monthlyNetIncome: year1.monthlyNetIncome,
+        annualNetIncome: year1.annualNetIncome,
         returnRate: year1.returnRate,
       },
       year2: {
         monthlyNetIncome: year2.monthlyNetIncome,
+        annualNetIncome: year2.annualNetIncome,
         returnRate: year2.returnRate,
       },
       year3: {
         monthlyNetIncome: year3.monthlyNetIncome,
+        annualNetIncome: year3.annualNetIncome,
         returnRate: year3.returnRate,
       },
       returnOver3Years: Number(returnOver3Years.toFixed(2)),
