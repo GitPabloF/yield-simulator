@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emerald Yield Simulator</title>
+</head>
+
+<body>
+    <h1>Emerald Yield Simulator</h1>
+    <form id="simulationForm" novalidate>
+        <!-- Purchase Price -->
+        <div class="form-group">
+            <label for="purchasePrice">Purchase Price</label>
+            <input type="number" name="purchasePrice" id="purchasePrice" required min="1">
+        </div>
+
+        <!-- Monthly Rent -->
+        <div class="form-group">
+            <label for="monthlyRent">Monthly Rent</label>
+            <input type="number" name="monthlyRent" id="monthlyRent" required min="0">
+        </div>
+
+        <!-- Annual Rental Fee -->
+        <div class="form-group">
+            <label for="annualRentalFee">Annual Rental Fee</label>
+            <input type="number" name="annualRentalFee" id="annualRentalFee" required min="0">
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="prospectEmail">Email</label>
+            <input type="email" name="prospectEmail" id="prospectEmail" required>
+        </div>
+        <button type="submit">Submit</button>
+
+    </form>
+    <div id="result"></div>
+</body>
+
+
+</html>
