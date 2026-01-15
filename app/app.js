@@ -1,6 +1,7 @@
 const express = require("express")
 const dotenv = require("dotenv")
 const { connectDatabase } = require("./config/database")
+const router = require("./routes")
 
 dotenv.config()
 
@@ -8,7 +9,7 @@ dotenv.config()
  * Create the Express app
  */
 const createApp = async () => {
-  try{
+  try {
 
     const app = express()
     // middleware
@@ -17,13 +18,16 @@ const createApp = async () => {
 
     // database connection
     await connectDatabase()
-  
+
     const PORT = process.env.PORT || 3000
 
     app.get("/", (req, res) => {
       res.send("Yield Simulator server is running")
     })
 
+    app.use('/api/', router)
+
+    // start server
     app.listen(PORT, () => {
       console.log(`Server is listening on http://localhost:${PORT}`)
     })
