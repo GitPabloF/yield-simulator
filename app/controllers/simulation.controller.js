@@ -74,7 +74,7 @@ const createSimulationController = async (req, res) => {
 
         return res.status(201).json({
             message: "Simulation created successfully",
-            simulation,
+            data: simulation,
         })
     } catch (error) {
         console.error("Error creating simulation:", error)
