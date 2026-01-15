@@ -1,7 +1,9 @@
 const express = require("express")
+const path = require("path")
 const dotenv = require("dotenv")
 const { connectDatabase } = require("./config/database")
-const router = require("./routes")
+const apiRoutes = require("./routes/api")
+const webRoutes = require("./routes/web")
 
 dotenv.config()
 
@@ -13,6 +15,7 @@ const createApp = async () => {
 
     const app = express()
     // middleware
+    app.use(express.static(path.join(__dirname, "public")))
     app.use(express.json())
     app.use(express.urlencoded({ extended: true }))
 
@@ -25,7 +28,13 @@ const createApp = async () => {
       res.send("Yield Simulator server is running")
     })
 
-    app.use('/api/', router)
+    app.set("view engine", "ejs")
+    app.set("views", "app/views")
+
+    // api routes
+    app.use('/api/', apiRoutes)
+    // web routes
+    app.use('/app', webRoutes)
 
     // start server
     app.listen(PORT, () => {
