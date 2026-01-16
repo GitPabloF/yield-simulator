@@ -4,3 +4,6 @@ node_modules/
 .env.production
 *.log
 .DS_Store
+
+# Local dataset
+app/data/
