@@ -4,6 +4,7 @@ const dotenv = require("dotenv")
 const { connectDatabase } = require("./config/database")
 const apiRoutes = require("./routes/api")
 const webRoutes = require("./routes/web")
+const { loadBookingData } = require("./utils/csvLoader")
 
 dotenv.config()
 
@@ -21,6 +22,9 @@ const createApp = async () => {
 
     // database connection
     await connectDatabase()
+
+    // load booking data
+    loadBookingData()
 
     const PORT = process.env.PORT || 3000
 
