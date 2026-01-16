@@ -69,7 +69,6 @@ main {
     border-color: var(--emerald);
 }
 
-/* Primary Button */
 .btn-primary {
     background-color: var(--emerald);
     border-color: var(--emerald);
