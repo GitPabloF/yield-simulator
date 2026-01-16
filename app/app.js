@@ -28,17 +28,13 @@ const createApp = async () => {
 
     const PORT = process.env.PORT || 3000
 
-    app.get("/", (req, res) => {
-      res.send("Yield Simulator server is running")
-    })
-
     app.set("view engine", "ejs")
     app.set("views", "app/views")
 
     // api routes
     app.use('/api/', apiRoutes)
     // web routes
-    app.use('/app', webRoutes)
+    app.use('/', webRoutes)
 
     // start server
     app.listen(PORT, () => {
