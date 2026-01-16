@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
  */
 const SimulationSchema = new mongoose.Schema(
   {
+    // Purchase details
     purchasePrice: {
       type: Number,
       required: true,
@@ -23,6 +24,23 @@ const SimulationSchema = new mongoose.Schema(
       min: 0,
     },
 
+    // Property characteristics
+    surface: {
+      type: Number,
+      required: false,
+    },
+    bedrooms: {
+      type: Number,
+      required: false,
+    },
+    locationScore: {
+      type: Number,
+      required: false,
+      min: 1,
+      max: 10,
+    },
+
+    // Prospect email
     prospectEmail: {
       type: String,
       required: true,
@@ -31,21 +49,21 @@ const SimulationSchema = new mongoose.Schema(
     },
 
     managementCommission: {
-        year1: {
-            type: Number,
-            required: true,
-            default: 0.3, 
-        },
-        year2: {
-            type: Number,
-            required: true,
-            default: 0.25,
-        },
-        year3Plus: {
-            type: Number,
-            required: true,
-            default: 0.2,
-        },
+      year1: {
+        type: Number,
+        required: true,
+        default: 0.3,
+      },
+      year2: {
+        type: Number,
+        required: true,
+        default: 0.25,
+      },
+      year3Plus: {
+        type: Number,
+        required: true,
+        default: 0.2,
+      },
     },
 
     result: {

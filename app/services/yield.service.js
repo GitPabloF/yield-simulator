@@ -8,6 +8,7 @@
  * @param {number} managementCommissionYear1
  * @param {number} managementCommissionYear2
  * @param {number} managementCommissionYear3Plus
+ * @param {number} occupancyRate 
  * @returns {Object} Computed yield information
  */
 const calculateYield = ({
@@ -17,10 +18,14 @@ const calculateYield = ({
   managementCommissionYear1,
   managementCommissionYear2,
   managementCommissionYear3Plus,
+  occupancyRate = 1.0,
 }) => {
-
   // validate input data
-  if (purchasePrice === undefined || purchasePrice === null || purchasePrice <= 0) {
+  if (
+    purchasePrice === undefined ||
+    purchasePrice === null ||
+    purchasePrice <= 0
+  ) {
     throw new Error("Purchase price must be greater than zero.")
   }
 
@@ -28,7 +33,11 @@ const calculateYield = ({
     throw new Error("Monthly rent cannot be negative.")
   }
 
-  if (annualRentalFee === undefined || annualRentalFee === null || annualRentalFee < 0) {
+  if (
+    annualRentalFee === undefined ||
+    annualRentalFee === null ||
+    annualRentalFee < 0
+  ) {
     throw new Error("Annual rental fee cannot be negative.")
   }
 
@@ -44,14 +53,13 @@ const calculateYield = ({
     throw new Error("Management commission year 3 plus cannot be negative.")
   }
 
-  const grossAnnualRent = monthlyRent * 12
+  // implement the gross annual within the occupancy rate
+  const grossAnnualRent = monthlyRent * 12 * occupancyRate
 
   // calculate the result for each year
   const calculateYearResult = (commissionRate) => {
     const annualNetIncome =
-      grossAnnualRent -
-      annualRentalFee -
-      (grossAnnualRent * commissionRate)
+      grossAnnualRent - annualRentalFee - grossAnnualRent * commissionRate
 
     const monthlyNetIncome = annualNetIncome / 12
     const returnRate = (annualNetIncome / purchasePrice) * 100
@@ -68,31 +76,28 @@ const calculateYield = ({
   const year3 = calculateYearResult(managementCommissionYear3Plus)
 
   const totalNetIncome3Years =
-    year1.annualNetIncome +
-    year2.annualNetIncome +
-    year3.annualNetIncome
+    year1.annualNetIncome + year2.annualNetIncome + year3.annualNetIncome
 
-  const returnOver3Years =
-    (totalNetIncome3Years / purchasePrice) * 100
+  const returnOver3Years = (totalNetIncome3Years / purchasePrice) * 100
 
-    return {
-      year1: {
-        monthlyNetIncome: year1.monthlyNetIncome,
-        annualNetIncome: year1.annualNetIncome,
-        returnRate: year1.returnRate,
-      },
-      year2: {
-        monthlyNetIncome: year2.monthlyNetIncome,
-        annualNetIncome: year2.annualNetIncome,
-        returnRate: year2.returnRate,
-      },
-      year3: {
-        monthlyNetIncome: year3.monthlyNetIncome,
-        annualNetIncome: year3.annualNetIncome,
-        returnRate: year3.returnRate,
-      },
-      returnOver3Years: Number(returnOver3Years.toFixed(2)),
-    }
+  return {
+    year1: {
+      monthlyNetIncome: year1.monthlyNetIncome,
+      annualNetIncome: year1.annualNetIncome,
+      returnRate: year1.returnRate,
+    },
+    year2: {
+      monthlyNetIncome: year2.monthlyNetIncome,
+      annualNetIncome: year2.annualNetIncome,
+      returnRate: year2.returnRate,
+    },
+    year3: {
+      monthlyNetIncome: year3.monthlyNetIncome,
+      annualNetIncome: year3.annualNetIncome,
+      returnRate: year3.returnRate,
+    },
+    returnOver3Years: Number(returnOver3Years.toFixed(2)),
+  }
 }
 
 module.exports = {
